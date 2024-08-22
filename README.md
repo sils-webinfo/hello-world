@@ -74,8 +74,7 @@ locally][local]. (“[Clone][clone]” means “copy.”)
 
 You should see a repository named `<your-github-username>/hello-world`
 in the list of repositories available to clone. (Make sure you do not
-accidentally clone the `programming-for-info-pros/hello-world`
-repository.)
+accidentally clone the `sils-webinfo/hello-world` repository.)
 
 Once you’ve selected the repository to clone, you’ll be prompted to
 pick a local folder on your computer as the destination of your
