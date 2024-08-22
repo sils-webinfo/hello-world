@@ -1,28 +1,17 @@
-PYTHON := ./venv/bin/python
-PIP := ./venv/bin/python -m pip
-PYTEST := ./venv/bin/pytest
-PYTEST_FLAGS := -vv -x -s
-REPL := ./venv/bin/ptpython
+SHELL := /usr/bin/env bash
+RIOT := tools/jena/bin/riot
 
-.PHONY: setup run test repl clean
+.PHONY: superclean validate setup
 
-$(PYTHON):
-	python3 -m venv venv
+superclean:
+	$(MAKE) -s -C tools/jena clean
 
-$(PYTEST) $(REPL): | $(PYTHON)
-	$(PIP) install --upgrade pip
-	$(PIP) install -r requirements.txt
+$(RIOT):
+	which java || \
+	(sudo apt update && sudo apt -y install default-jre)
+	$(MAKE) -s -C tools/jena
 
-setup: $(PYTEST) $(REPL)
+setup: $(RIOT)
 
-run: | $(PYTHON)
-	$(PYTHON) hello_world.py
-
-test: | $(PYTEST)
-	$(PYTEST) $(PYTEST_FLAGS)
-
-repl:
-	$(REPL)
-
-clean:
-	rm -rf venv
+validate: $(RIOT)
+	./$(RIOT) --validate --count books.ttl

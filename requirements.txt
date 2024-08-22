@@ -1,2 +1,0 @@
-pytest==8.1.1
-ptpython==3.0.29
